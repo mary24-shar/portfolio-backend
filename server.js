@@ -1,74 +1,68 @@
-// ================= IMPORTS =================
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql2");
-
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
 
 const app = express();
-// middleware
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ================= MYSQL CONNECTION =================
+// ==================== MYSQL CONNECTION ====================
+// I am using your Railway credentials from your screenshot
 const db = mysql.createConnection({
-    host:crossover.proxy.rlwy.net ,
-    user:root ,
-password:EqewkVjySjOTioIHlhjDLUoYfUFkPdie,
-    database:railway,
+    host:"crossover.proxy.rlwy.net",
+    user: "root",
+    password:"EqewkVjysjoTioIHlhjDLuoYFuFkPdie",
+    database: "railway",
     port:32290
 });
-// Connect to MySQL
-db.connect(err => {
+
+db.connect((err) => {
     if (err) {
         console.log("❌ DB Connection Failed:", err);
     } else {
-        console.log("✅ Connected to MySQL");
+        console.log("✅ Connected to MySQL (Railway)");
     }
 });
 
-// ================= ROUTES =================
+// ==================== ROUTES ====================
 
-// Test route
+// 1. Test Route
 app.get("/", (req, res) => {
-    res.send("🚀 Backend running with MySQL");
+    res.send("🚀 Backend is running and connected to the 'projects' table!");
 });
 
-// Save message to database
-app.post("/contact", (req, res) => {
-    const{name,email,message};=req.body;
-
-    db.query(sql,(err,result)=>{
+// 2. Get All Projects (To show on your portfolio)
+app.get("/projects", (req, res) => {
+    const sql = "SELECT * FROM projects";
+    db.query(sql, (err, results) => {
         if (err) {
-            console.error(err);
-            return res.send("error fetching messages");
+            return res.status(500).json({ error: err.message });
         }
-        res.json(result);
+        res.json(results);
     });
-    });
+});
 
-    const sql = "INSERT INTO projects (name,email,messages) VALUES (?, ?, ?)";
+// 3. Save Message/Project to the 'projects' table
+// This matches your existing columns: title, description, technology_stack, github_link
+app.post("/contact", (req, res) => {
+    const { title, description, technology_stack, github_link } = req.body;
 
-    db.query(sql, [name, email, message], (err, result) => {
+    const sql = "INSERT INTO projects (title, description, technology_stack, github_link) VALUES (?, ?, ?, ?)";
+
+    db.query(sql, [title, description, technology_stack, github_link], (err, result) => {
         if (err) {
             console.log("❌ Insert Error:", err);
-            return res.status(500).json({
-                message: "Database error ❌"
-            });
+            return res.status(500).json({ error: "Database error. Check your column names!" });
         }
-
-        console.log("📩 Message saved:", result);
-
-        res.json({
-            message: "Message saved to database 💜"
-        });
+        console.log("✅ Data saved to projects table:", result);
+        res.json({ message: "Project details saved successfully! 💜" });
     });
-
-
-
-
-// ================= START SERVER =================
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`https://portfolio-backend-7kfj.onrender.com${PORT}`);
 });
+
+// ==================== START SERVER ====================
+const PORT = PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`https://portfolio-backend-7kfj.onrender.com ${PORT}`)
+    });
