@@ -10,7 +10,7 @@ app.use(express.json());
 
 // ==================== MYSQL CONNECTION ====================
 // I am using your Railway credentials from your screenshot
-const db = mysql.createConnection({
+const db=mysql.createConnection({
     host:"crossover.proxy.rlwy.net",
     user: "root",
     password:"EqewkVjysjoTioIHlhjDLuoYFuFkPdie",
@@ -62,7 +62,7 @@ app.post("/contact", (req, res) => {
 });
 
 // ==================== START SERVER ====================
-const PORT = PORT || 5000;
+const PORT =  process.env,PORT||5000;
 app.listen(PORT, () => {
     console.log(`https://portfolio-backend-7kfj.onrender.com ${PORT}`)
     });
