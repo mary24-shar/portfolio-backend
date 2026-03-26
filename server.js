@@ -14,7 +14,7 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: "crossover.proxy.rlwy.net",
   user: "root",
-  password: "EqewkVjySjOTioIHlhjDLUoYfUFkPdie",
+  password: "zcRxegzyieCQNfrwbXiTMqbtrcmKGxLe",
   database: "railway",
   port: 21930,
 });
