@@ -51,29 +51,21 @@ app.get("/projects", (req, res) => {
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
 
-  const sql = `
-    INSERT INTO projects (title, description, technology_stack, github_link)
-    VALUES (?, ?, ?, ?)
-  `;
-
-  db.query(
-    sql,
-    [
-      name,                 // title
-      message,              // description
-      email,                // technology_stack
-      "from-contact-form",  // github_link (dummy value)
-    ],
-    (err, result) => {
-      if (err) {
-        console.log("❌ Insert Error:", err);
-        return res.status(500).json({ error: err.message });
-      }
-
-      console.log("✅ Data saved:", result);
-      res.json({ message: "Message sent successfully!" });
+  // We map your form data to your table columns:
+  // name -> title
+  // message -> description
+  // email -> technology_stack
+  // "from-portfolio" -> github_link
+  const sql = "INSERT INTO projects (title, description, technology_stack, github_link) VALUES (?, ?, ?, ?)";
+  
+  db.query(sql, [name, message, email, "from-portfolio-form"], (err, result) => {
+    if (err) {
+      console.log("❌ Insert Error:", err);
+      return res.status(500).json({ error: err.message });
     }
-  );
+    console.log("✅ Data saved:", result);
+    res.json({ message: "Message sent successfully!" });
+  });
 });
 
 /* ================= START SERVER ================= */
