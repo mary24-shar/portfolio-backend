@@ -13,9 +13,9 @@ app.use(express.json());
 const db=mysql.createConnection({
     host:"crossover.proxy.rlwy.net",
     user: "root",
-    password:"EqewkVjysjoTioIHlhjDLuoYFuFkPdie",
+    password:"zcRxegzyieCQNfrwbXiTMqbtrcmKGxLe",
     database: "railway",
-    port:32290
+    port:21930
 });
 
 db.connect((err) => {
@@ -35,8 +35,8 @@ app.get("/", (req, res) => {
 
 // 2. Get All Projects (To show on your portfolio)
 app.get("/projects", (req, res) => {
-    const sql = "SELECT * FROM projects";
-    db.query(sql, (err, results) => {
+    const mysql = "SELECT * FROM projects";
+    db.query(mysql, (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -49,9 +49,9 @@ app.get("/projects", (req, res) => {
 app.post("/contact", (req, res) => {
     const { title, description, technology_stack, github_link } = req.body;
 
-    const sql = "INSERT INTO projects (title, description, technology_stack, github_link) VALUES (?, ?, ?, ?)";
+    const mysql = "INSERT INTO projects (title, description, technology_stack, github_link) VALUES (?, ?, ?, ?)";
 
-    db.query(sql, [title, description, technology_stack, github_link], (err, result) => {
+    db.query(mysql, [title, description, technology_stack, github_link], (err, result) => {
         if (err) {
             console.log("❌ Insert Error:", err);
             return res.status(500).json({ error: "Database error. Check your column names!" });
@@ -62,7 +62,7 @@ app.post("/contact", (req, res) => {
 });
 
 // ==================== START SERVER ====================
-const PORT =  process.env,PORT||5000;
+const PORT =  process.env.PORT||5000;
 app.listen(PORT, () => {
     console.log(`https://portfolio-backend-7kfj.onrender.com ${PORT}`)
     });
