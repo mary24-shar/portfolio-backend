@@ -1,5 +1,5 @@
 // ================= IMPORTS =================
-require("dotenv").config();
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
@@ -16,7 +16,7 @@ const db = mysql.createConnection({
     user: process.env.MYSQLUSER,
     password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDATABSES,
-    port:process.env.MYSQLPORT || 3306
+    port:process.env.MYSQLPORT || 32290
 });
 
 // Connect to MySQL
@@ -46,7 +46,7 @@ app.post("/contact", (req, res) => {
         });
     }
 
-    const sql = "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO projects (name, email, message) VALUES (?, ?, ?)";
 
     db.query(sql, [name, email, message], (err, result) => {
         if (err) {
