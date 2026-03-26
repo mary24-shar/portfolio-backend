@@ -1,26 +1,24 @@
 // ================= IMPORTS =================
-require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
 
-// ================= APP SETUP =================
-const app = express();
 
+const app = express();
+// middleware
 app.use(cors());
 app.use(express.json());
 
 // ================= MYSQL CONNECTION =================
 const db = mysql.createConnection({
-    host: process.env.MYSQLHOST,
-    user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASSWORD,
-    database: process.env.MYSQLDATABSES,
-    port:process.env.MYSQLPORT || 32290
+    host:crossover.proxy.rlwy.net ,
+    user:root ,
+password:EqewkVjySjOTioIHlhjDLUoYfUFkPdie,
+    database:railway,
+    port:32290
 });
-
 // Connect to MySQL
-db.connect((err) => {
+db.connect(err => {
     if (err) {
         console.log("❌ DB Connection Failed:", err);
     } else {
@@ -37,16 +35,18 @@ app.get("/", (req, res) => {
 
 // Save message to database
 app.post("/contact", (req, res) => {
-    const { name, email, message } = req.body;
+    const{name,email,message};=req.body;
 
-    // Validation
-    if (!name || !email || !message) {
-        return res.status(400).json({
-            message: "All fields are required ❌"
-        });
-    }
+    db.query(sql,(err,result)=>{
+        if (err) {
+            console.error(err);
+            return res.send("error fetching messages");
+        }
+        res.json(result);
+    });
+    });
 
-    const sql = "INSERT INTO projects (name, email, message) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO projects (name,email,messages) VALUES (?, ?, ?)";
 
     db.query(sql, [name, email, message], (err, result) => {
         if (err) {
@@ -62,25 +62,13 @@ app.post("/contact", (req, res) => {
             message: "Message saved to database 💜"
         });
     });
-});
 
-// Get all messages (optional for testing/admin)
-app.get("/messages", (req, res) => {
-    db.query("SELECT * FROM messages", (err, results) => {
-        if (err) {
-            console.log("❌ Fetch Error:", err);
-            return res.status(500).json({
-                message: "Error fetching data ❌"
-            });
-        }
 
-        res.json(results);
-    });
-});
+
 
 // ================= START SERVER =================
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
+    console.log(`https://portfolio-backend-7kfj.onrender.com${PORT}`);
 });
