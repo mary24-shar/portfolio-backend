@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mary Sharon | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        🌙
+    </div>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+
+    <header>
+        <h1>Mary Sharon</h1>
+        <h2 class="typing"></h2>
+    </header>
+
+    <section class="reveal">
+        <h2>About</h2>
+        <div class="card">
+            <p>
+                I am Mary Sharon, a passionate BCA pursuing student who loves coding
+                and front-end design. I enjoy building responsive and visually
+                attractive websites using modern technologies.
+                My goal is to become a skilled and creative front-end developer.
+            </p>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <h2>Skills</h2>
+        <div class="card">
+
+            <div class="skill">
+                <span>C</span>
+                <div class="progress">
+                    <div class="progress-bar" data-progress="85%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <span>C++</span>
+                <div class="progress">
+                    <div class="progress-bar" data-progress="80%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <span>Python</span>
+                <div class="progress">
+                    <div class="progress-bar" data-progress="75%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <span>HTML</span>
+                <div class="progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <span>Java</span>
+                <div class="progress">
+                    <div class="progress-bar" data-progress="70%"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="project-section">
+        <h2>My Projects</h2>
+
+        <div class="project-container">
+
+            <!-- Project 1 -->
+            <div class="project-card reveal">
+                <img src="https://via.placeholder.com/400x200" alt="Portfolio Project">
+                <h3>Personal Portfolio Website</h3>
+                <p>
+                    A modern dark-themed portfolio with animations,
+                    particle background and smooth scrolling.
+                </p>
+
+                <div class="project-buttons">
+                    <a href="https://github.com/mary24-shar" target="_blank" class="btn github-btn">GitHub</a>
+                    <a href="#" target="_blank" class="btn demo-btn">Live Demo</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card reveal">
+                <img src="https://via.placeholder.com/400x200" alt="Landing Page">
+                <h3>Responsive Landing Page</h3>
+                <p>
+                    A responsive landing page built using HTML & CSS
+                    with modern UI and mobile-friendly layout.
+                </p>
+
+                <div class="project-buttons">
+                    <a href="#" class="btn github-btn">GitHub</a>
+                    <a href="#" class="btn demo-btn">Live Demo</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="reveal contact-section">
+        <h2>Contact Me</h2>
+        <div class="contact-card">
+
+            <div class="social-links">
+
+                <a href="mailto:marysharon.2407@gmail.com" class="social-btn">
+                    📧 Email Me
+                </a>
+
+                <a href="https://github.com/mary24-shar" target="_blank" class="social-btn">
+                    💻 GitHub
+                </a>
+
+                <a href="https://www.linkedin.com/in/mary-sharon-291390382" target="_blank" class="social-btn">
+                    🔗 LinkedIn
+                </a>
+
+            </div>
+
+        </div>
+    </section><!-- Contact Section ends here -->
+    <!-- 💌 Message Section starts here -->
+    <section class="message-section reveal">
+        <h2>Send Me a Message</h2>
+
+        <div class="message-card">
+            <form id="contactForm">
+
+                <div class="input-group">
+                    <input type="text" id="name" required>
+                    <label>Your Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" required>
+                    <label>Your Email</label>
+                </div>
+
+                <div class="input-group">
+                    <textarea id="message" rows="4" required></textarea>
+                    <label>Your Message</label>
+                </div>
+
+                <button type="submit" class="send-btn">
+                    Send Message 🚀
+                </button>
+
+            </form>
+        </div>
+    </section>
+    <footer>
+        © 2026 Mary Sharon | Front-End Developer
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8micQueI07dxm6fOr5qacln_zwptD8Bs",
+            authDomain: "marys-27fdc.firebaseapp.com",
+            projectId: "marys-27fdc",
+            storageBucket: "marys-27fdc.firebasestorage.app",
+            messagingSenderId: "532494071933",
+            appId: "1:532494071933:web:933d688cd87a0706265914"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            try {
+                await addDoc(collection(db, "messages"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    createdAt: new Date()
+                });
+
+                alert("Message Sent Successfully 💜");
+                form.reset();
+            } catch (error) {
+                alert("Error sending message ❌");
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>

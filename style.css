@@ -1,0 +1,425 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f051d, #1b0b3a, #2d0f5f);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Particle Canvas */
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+header h1 {
+    font-size: 48px;
+}
+
+.typing {
+    margin-top: 15px;
+    font-size: 22px;
+    color: #d0a9ff;
+    min-height: 30px;
+}
+
+/* Sections */
+section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #d0a9ff;
+}
+
+/* Glass Card */
+.card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(128, 0, 255, 0.4);
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Skill Bars */
+.skill {
+    margin-bottom: 20px;
+}
+
+.skill span {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #bb86fc, #9b59ff);
+    border-radius: 10px;
+    transition: width 2s ease;
+}
+
+/* Scroll reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 0.8s;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+a {
+    color: #bb86fc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #bb86fc;
+}
+
+/* Contact Section */
+.contact-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Glass Card */
+.contact-card {
+    margin: auto;
+    width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(187, 134, 252, 0.4);
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
+    animation: floatCard 4s ease-in-out infinite;
+    transition: 0.4s;
+}
+
+/* Floating animation */
+@keyframes floatCard {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Contact items */
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 18px 0;
+    font-size: 18px;
+}
+
+.contact-item span {
+    font-size: 22px;
+}
+
+/* Link styling */
+.contact-item a {
+    color: #bb86fc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.contact-item a:hover {
+    color: white;
+    text-shadow: 0 0 10px #bb86fc;
+}
+
+/* Project Grid */
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Animated Gradient Border */
+.project-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: #1a1a2e;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s ease;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #bb86fc, #9b59ff, #6c5ce7, #bb86fc);
+    background-size: 400% 400%;
+    animation: gradientBorder 6s linear infinite;
+    z-index: -1;
+    border-radius: 22px;
+}
+
+@keyframes gradientBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.project-card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.project-card h3 {
+    color: #bb86fc;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    color: #ddd;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.project-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.github-btn {
+    background: #24292e;
+    color: white;
+}
+
+.demo-btn {
+    background: #bb86fc;
+    color: #121212;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #bb86fc;
+    color: #121212;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 0 15px #bb86fc;
+    transition: 0.3s ease;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg) scale(1.1);
+}
+
+/* Light Mode */
+body.light-mode {
+    background: #f5f5f5;
+    color: #121212;
+}
+
+body.light-mode .project-card,
+body.light-mode .contact-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .project-card h3,
+body.light-mode h2 {
+    color: #6c5ce7;
+}
+
+body {
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Message Section */
+.message-section {
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.message-card {
+    max-width: 450px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(187, 134, 252, 0.4);
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
+    animation: floatCard 5s ease-in-out infinite;
+}
+
+/* Floating labels */
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #bb86fc;
+    background: transparent;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-group label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #bb86fc;
+    pointer-events: none;
+    transition: 0.3s;
+    background: #121212;
+    padding: 0 5px;
+}
+
+.input-group input:focus+label,
+.input-group input:valid+label,
+.input-group textarea:focus+label,
+.input-group textarea:valid+label {
+    top: -10px;
+    font-size: 12px;
+}
+
+/* Send Button */
+.send-btn {
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(45deg, #bb86fc, #6c5ce7);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #bb86fc;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-btn {
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #6a0dad, #8a2be2);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    transition: 0.4s ease;
+    width: 220px;
+    text-align: center;
+}
+
+.social-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.9);
+}
